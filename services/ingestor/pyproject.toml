@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opsos-ingestor"
+version = "0.1.0"
+description = "Ingestion utilities for OpsOS Platform"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+ingest = "ingestor.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["ingestor"]
