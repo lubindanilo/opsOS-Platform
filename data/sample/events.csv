@@ -1,0 +1,4 @@
+event_id,ts,user_id,event_type,properties
+e1,2026-02-04T10:00:00Z,u1,signup,"{""source"":""ads""}"
+e2,2026-02-04T10:05:00Z,u1,page_view,"{""page"":""pricing""}"
+e3,2026-02-04T10:06:00Z,,page_view,"{""page"":""home""}"
