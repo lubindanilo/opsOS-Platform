@@ -1,0 +1,18 @@
+Tue Feb 10 09:47:16 2026    data/perf/profile_opt2.pstats
+
+         36034100 function calls (36033804 primitive calls) in 11.825 seconds
+
+   Ordered by: internal time
+   List reduced from 590 to 10 due to restriction <10>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    1.544    1.544    7.182    7.182 csv_io.py:27(load_events_csv)
+  1000000    1.425    0.000    1.425    0.000 encoder.py:205(iterencode)
+  1000001    1.374    0.000    2.454    0.000 csv.py:107(__next__)
+  1000002    0.768    0.000    0.777    0.000 {built-in method builtins.next}
+  1000000    0.719    0.000    1.388    0.000 decoder.py:332(decode)
+  1000000    0.647    0.000    0.647    0.000 {method 'isoformat' of 'datetime.datetime' objects}
+        1    0.558    0.558    4.541    4.541 cli.py:12(_write_jsonl)
+  1000000    0.539    0.000    2.836    0.000 __init__.py:183(dumps)
+  1000000    0.504    0.000    2.055    0.000 encoder.py:183(encode)
+  1000000    0.498    0.000    0.498    0.000 {method 'write' of '_io.TextIOWrapper' objects}

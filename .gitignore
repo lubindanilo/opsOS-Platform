@@ -20,3 +20,11 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+
+# Local data outputs (do not commit)
+data/perf/
+data/out/
+*.pstats
+
+# Python virtual env
+.venv/
