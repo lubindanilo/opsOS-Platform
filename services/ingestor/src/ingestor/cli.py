@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import json
 import time
-from dataclasses import asdict
 from pathlib import Path
 
 from .csv_io import IngestError, load_events_csv
@@ -16,9 +15,14 @@ def _write_jsonl(out_path: Path, events: list[Event]) -> None:
 
     with out_path.open("w", encoding="utf-8") as f:
         for e in events:
-            obj = asdict(e)
-            obj["ts"] = obj["ts"].isoformat()  # datetime -> string for JSON
-            f.write(json.dumps(obj, ensure_ascii=False) + "\n")
+            obj = {
+                "event_id": e.event_id,
+                "ts": e.ts.isoformat(),
+                "user_id": e.user_id,
+                "event_type": e.event_type,
+                "properties": e.properties,
+            }
+            f.write(json.dumps(obj, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -67,3 +71,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  ... ({len(errors) - 5} more; use --show-errors to print all)")
 
     return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
