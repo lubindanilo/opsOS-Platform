@@ -44,3 +44,22 @@ time PYTHONPATH=services/ingestor/src uv run python -c "from ingestor.cli import
 - The internal `time=~2.8s` stayed similar across commits → the main improvement is not in CSV parsing itself.
 - The big gain comes from work outside the timed block (most likely JSONL writing / object conversion).
 - Next profiling focus: `json.loads`, `json.dumps`, and write path.
+
+## Compact JSON A/B test (same code, only separators differ)
+To isolate the effect of `json.dumps(..., separators=(",", ":"))`, we ran the same code twice:
+
+Commands:
+- Normal:
+  `time PYTHONPATH=services/ingestor/src uv run python -c "from ingestor.cli import main; raise SystemExit(main(['--input','data/perf/events_1m.csv','--output','/tmp/events_normal.jsonl','--max-errors','1']))"`
+- Compact:
+  `time PYTHONPATH=services/ingestor/src uv run python -c "from ingestor.cli import main; raise SystemExit(main(['--input','data/perf/events_1m.csv','--output','/tmp/events_compact.jsonl','--max-errors','1','--compact-json']))"`
+
+Results:
+- Normal total: 5.854s
+- Compact total: 5.840s
+- File sizes:
+  - normal: 138M
+  - compact: 126M
+
+Conclusion:
+- Compact JSON reduces output size significantly (~9%) but has no meaningful impact on runtime on this machine (difference is within noise).
